@@ -18,7 +18,7 @@ class FuzzySet:
     def __set_x_axis_values(self):
         x_axis_values: list = [self.begin_value, ]
         for i in range(0, self.x_axis_length):
-            x_axis_values.append(x_axis_values[i] + self.step_value)
+            x_axis_values.append(round((x_axis_values[i] + self.step_value), 2))
         self.value_axes[0] = x_axis_values
 
     def build_terms(self):

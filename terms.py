@@ -34,7 +34,9 @@ class SquareTerm(Term):
 
     def build(self, x_axis: list):
         for x in x_axis:
-            if self.begin <= x <= self.x1:
+            if self.x1 == x or self.x2 == x:
+                self.values.append(1)
+            elif self.begin <= x <= self.x1:
                 value = (x - self.begin) / (self.x1 - self.begin)
                 self.values.append(value)
             elif self.x1 <= x <= self.x2:
