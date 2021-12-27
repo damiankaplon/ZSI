@@ -17,6 +17,17 @@ class FuzzySetTest(TestCase):
         # THEN
         self.assertEqual(correct_list, fuzzy_set.value_axes[0])
 
+    def test_fuzzification(self):
+        # GIVEN
+        term = SquareTerm(-7, -5.5, -7.5, -5, "Very cold")
+        term2 = SquareTerm(-5.25, -3.5, -6, -3, "cold")
+        term_list = [term, term2]
+        fuzzy_set = FuzzySet(-10, 0, 0.25, term_list)
+        # WHEN
+        result = fuzzy_set.fuzz_the_input(-5.5)
+        # THEN
+        self.assertDictEqual({'Very cold': 1, 'cold': 0.6666666666666666}, result)
+
 
 class TermsTest(TestCase):
 

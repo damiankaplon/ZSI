@@ -1,8 +1,8 @@
 class Term:
-    def __init__(self, begin: int, end: int, name: str):
+    def __init__(self, begin: float, end: float, name: str):
         self.name: str = name
-        self.begin: int = begin
-        self.end: int = end
+        self.begin: float = begin
+        self.end: float = end
         self.values: list = []
 
     def build(self, x_axis: list):
@@ -10,7 +10,7 @@ class Term:
 
 
 class TriangleTerm(Term):
-    def __init__(self, x1: int, begin: int, end: int, name: str):
+    def __init__(self, x1: float, begin: float, end: float, name: str):
         super().__init__(begin, end, name)
         self.x1 = x1
 
@@ -27,7 +27,7 @@ class TriangleTerm(Term):
 
 
 class SquareTerm(Term):
-    def __init__(self, x1: int, x2: int, begin: int, end: int, name: str):
+    def __init__(self, x1: float, x2: float, begin: float, end: float, name: str):
         super().__init__(begin, end, name)
         self.x1 = x1
         self.x2 = x2

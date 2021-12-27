@@ -10,6 +10,7 @@ class FuzzySet:
         self.value_axes: list = [[self.begin_value, ], ]
         self.__set_x_axis_values()
         self.terms: list = terms
+        self.build_terms()
 
     def __calc_x_axis_length(self) -> int:
         return round(abs(self.end_value - self.begin_value) / self.step_value)
@@ -35,3 +36,10 @@ class FuzzySet:
                 pass
             else:
                 self.value_axes.remove(i)
+
+    def fuzz_the_input(self, input: float) -> dict:
+        fuzzy_result = dict()
+        index = self.value_axes[0].index(input)
+        for term in self.terms:
+            fuzzy_result[term.name] = term.values[index]
+        return fuzzy_result
