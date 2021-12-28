@@ -16,8 +16,8 @@ def main():
     term_chill = TriangleTerm(-1, -2, 0, "chill")
     term_good = TriangleTerm(0, -0.25, 0, "good")
     term_list = [term_super_cold, term_very_cold, term_cold, term_almost_cold, term_chill, term_good]
-    fuzzy_input_set = FuzzySet(-10, 0, 0.1, term_list)
-    print(fuzzy_input_set.fuzz_the_input(-7.3))
+    fuzzy_entry_set = FuzzySet(-10, 0, 0.1, term_list)
+    print(fuzzy_entry_set.fuzzificate_value(-7.3))
 
 
 def set_up_gui():

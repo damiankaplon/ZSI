@@ -1,3 +1,4 @@
+from excpetions import InputError
 from terms import Term
 
 
@@ -31,15 +32,45 @@ class FuzzySet:
         self.value_axes.append(term.values)
 
     def erase_terms(self):
-        for i in range(0, len(self.value_axes) - 1):
-            if i == 0:
-                pass
-            else:
-                self.value_axes.remove(i)
+        for i in range(len(self.value_axes) - 1, 0, -1):
+            self.value_axes.pop(i)
 
-    def fuzz_the_input(self, input: float) -> dict:
+    def fuzzificate_value(self, entry: float) -> dict:
+        """
+        :param entry:
+        :return: fuzzy_value: dict key - name of term, value - the value of belonging
+        """
         fuzzy_result = dict()
-        index = self.value_axes[0].index(input)
+        index = self.value_axes[0].index(entry)
         for term in self.terms:
             fuzzy_result[term.name] = term.values[index]
         return fuzzy_result
+
+    def conclude(self, fuzzy_entry: dict):
+        """
+        :param fuzzy_entry:  dict key - name of term, value - the value of belonging
+        :return:
+        """
+        # validating input
+        if len(fuzzy_entry) != len(self.terms):
+            raise InputError("Fuzzy value doesnt match amount of terms")
+        for term in self.terms:
+            if term.name not in fuzzy_entry.keys():
+                raise InputError("Fuzzy value keys doesnt match one/some of the names of terms")
+        # stop
+        i = 1
+        for term in self.terms:
+            cut_value = fuzzy_entry.get(term.name)
+            self.value_axes[i] = term.cut(cut_value)
+            i += 1
+
+        result = []
+        for i in range(len(self.value_axes[0])):
+            maximum = 0
+            for j in range(1, len(self.value_axes)):
+                maximum = max(maximum, self.value_axes[j][i])
+                if j == len(self.value_axes) - 1:
+                    result.append(maximum)
+
+        self.build_terms()
+        return result
