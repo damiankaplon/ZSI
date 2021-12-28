@@ -1,5 +1,5 @@
-from excpetions import InputError
-from terms import Term
+from fuzzylogic.excpetions import InputError
+from fuzzylogic.terms import Term
 
 
 class FuzzySet:

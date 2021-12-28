@@ -3,8 +3,8 @@
 import sys
 from PyQt5 import QtWidgets
 # TODO zrobimy tu pewnie jakies proste gui z Tkinter
-from fuzzyset import FuzzySet
-from terms import TriangleTerm, SquareTerm
+from fuzzylogic.fuzzyset import FuzzySet
+from fuzzylogic.terms import TriangleTerm, SquareTerm
 from gui import Ui_MainWindow
 
 

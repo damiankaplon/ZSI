@@ -3,8 +3,8 @@
 import unittest
 from unittest import TestCase
 
-from fuzzyset import FuzzySet
-from terms import *
+from fuzzylogic.terms import *
+from fuzzylogic.fuzzyset import *
 
 
 class FuzzySetTest(TestCase):

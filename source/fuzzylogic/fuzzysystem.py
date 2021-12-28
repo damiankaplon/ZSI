@@ -1,4 +1,4 @@
-from excpetions import InputError
+from fuzzylogic.excpetions import InputError
 
 
 class FuzzySystem:
