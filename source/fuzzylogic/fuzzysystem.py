@@ -1,27 +1,37 @@
-from fuzzylogic.excpetions import InputError
+from fuzzylogic.fuzzyset import FuzzySet
 
 
 class FuzzySystem:
-    def __init__(self, entry_sets: list, out_sets: list):
+    def __init__(self, entry_set: FuzzySet, out_set: FuzzySet, rules: list):
         """
-        :param entry_sets: list of fuzzy sets which are entry sets
-        :param out_sets: list of fuzzy sets which are out sets
+        :param rules: list of rules
+        :param entry_set: list of fuzzy sets which are entry sets
+        :param out_set: list of fuzzy sets which are out sets
         """
-        self.entry_fuzzy_sets: list = entry_sets
-        self.out_fuzzy_sets: list = out_sets
+        self.entry_fuzzy_set: FuzzySet = entry_set
+        self.out_fuzzy_set: FuzzySet = out_set
+        self.rules: list = rules
 
-    def compute(self, entries: list):
+    def resolve_rules(self, fuzzy_value: dict):
         """
-        :param entries: list of "user" input values to solve by fuzzy system. Quantity equal to amount of entry sets
+        :param fuzzy_value: created by fuzzification done on entry_fuzzy_set
+        :return:
+        """
+        result_fuzzy_value: dict = {}
+        for rule in self.rules:
+            result_fuzzy_value[rule.affected] = fuzzy_value.get(rule.parent)
+        return result_fuzzy_value
+
+    def compute(self, entry: float):
+        """
+        :param entry: "user" input value to solve by fuzzy system
         :return: value calculated by fuzzy system
         """
-        if len(entries) != len(self.entry_fuzzy_sets):
-            raise InputError("Entry amount has to be equal to amount of fuzzy system entry sets")
+        fuzzy_value = self.entry_fuzzy_set.fuzzificate_value(entry)
+        fuzzy_value_transformed = self.resolve_rules(fuzzy_value)
+        result_term = self.out_fuzzy_set.conclude(fuzzy_value_transformed)
+        return result_term
 
-        fuzzificated_values: list = []
-        i = 0
-        for entry in entries:
-            fuzzificated_values.append(self.entry_fuzzy_sets[i].fuzzificate_value(entry))
-            i += 1
+
 
 

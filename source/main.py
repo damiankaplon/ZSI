@@ -4,6 +4,8 @@ import sys
 from PyQt5 import QtWidgets
 # TODO zrobimy tu pewnie jakies proste gui z Tkinter
 from fuzzylogic.fuzzyset import FuzzySet
+from fuzzylogic.fuzzysystem import FuzzySystem
+from fuzzylogic.rule import Rule
 from fuzzylogic.terms import TriangleTerm, SquareTerm
 from gui import Ui_MainWindow
 
@@ -14,11 +16,20 @@ def main():
     term_cold = SquareTerm(-5.25, -3.5, -6.5, -3, "cold")
     term_almost_cold = SquareTerm(-3, -2, -3.5, -1.5, "almost cold")
     term_chill = TriangleTerm(-1, -2, 0, "chill")
-    term_good = TriangleTerm(0, -0.25, 0, "good")
-    term_list = [term_super_cold, term_very_cold, term_cold, term_almost_cold, term_chill, term_good]
-    fuzzy_entry_set = FuzzySet(-10, 0, 0.1, term_list)
-    print(fuzzy_entry_set.fuzzificate_value(-7.3))
-
+    entry_terms = [term_super_cold, term_very_cold, term_cold, term_almost_cold, term_chill]
+    fuzzy_entry_set = FuzzySet(-10, 0, 0.1, entry_terms)
+    term_very_small = TriangleTerm(10, 0, 20, "very small")
+    term_small = TriangleTerm(20, 10, 30, "small")
+    term_medium = TriangleTerm(45, 20, 60, "medium")
+    term_big = TriangleTerm(60, 45, 80, "big")
+    term_very_big = TriangleTerm(80, 60, 90, "very big")
+    out_terms = [term_very_small, term_small, term_medium, term_big, term_very_big]
+    fuzzy_out_set = FuzzySet(0, 90, 1, out_terms)
+    rules = [Rule("super cold", "very big"), Rule("very cold", "big"), Rule("cold", "medium"),
+             Rule("almost cold", "small"), Rule("chill", "very small")]
+    fuzzy_system = FuzzySystem(fuzzy_entry_set, fuzzy_out_set, rules)
+    print(fuzzy_entry_set.fuzzificate_value(-5))
+    print(fuzzy_system.compute(-5.4))
 
 def set_up_gui():
     app = QtWidgets.QApplication(sys.argv)
@@ -31,4 +42,4 @@ def set_up_gui():
 
 if __name__ == "__main__":
     main()
-    set_up_gui()
+    #set_up_gui()

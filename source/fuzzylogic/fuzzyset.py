@@ -40,7 +40,23 @@ class FuzzySet:
         :param entry:
         :return: fuzzy_value: dict key - name of term, value - the value of belonging
         """
+        # IF USER INPUT(ENTRY) IS OUT OF X AXIS BOUNDS
         fuzzy_result = dict()
+
+        if entry > max(self.value_axes[0]):
+            max_x = max(self.value_axes[0])
+            max_x_index = self.value_axes[0].index(max_x)
+            for term in self.terms:
+                fuzzy_result[term.name] = term.values[max_x_index]
+            return fuzzy_result
+
+        if entry < min(self.value_axes[0]):
+            min_x = min(self.value_axes[0])
+            min_x_index = self.value_axes[0].index(min_x)
+            for term in self.terms:
+                fuzzy_result[term.name] = term.values[min_x_index]
+            return fuzzy_result
+
         index = self.value_axes[0].index(entry)
         for term in self.terms:
             fuzzy_result[term.name] = term.values[index]

@@ -57,8 +57,8 @@ class TermsTest(TestCase):
 
     def test_eq(self):
         term1 = Term(1, 2, "name")
-        term2 = Term(2, 3, "other name")
-        self.assertTrue(term1 != term2)
+        term2 = Term(2, 3, "name")
+        self.assertTrue(term1 == term2)
 
     def test_cut(self):
         # GIVEN
