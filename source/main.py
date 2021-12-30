@@ -24,12 +24,12 @@ def main():
     term_big = TriangleTerm(60, 45, 80, "big")
     term_very_big = TriangleTerm(80, 60, 90, "very big")
     out_terms = [term_very_small, term_small, term_medium, term_big, term_very_big]
-    fuzzy_out_set = FuzzySet(0, 90, 1, out_terms)
+    fuzzy_out_set = FuzzySet(0, 90, 0.5, out_terms)
     rules = [Rule("super cold", "very big"), Rule("very cold", "big"), Rule("cold", "medium"),
              Rule("almost cold", "small"), Rule("chill", "very small")]
     fuzzy_system = FuzzySystem(fuzzy_entry_set, fuzzy_out_set, rules)
-    print(fuzzy_entry_set.fuzzificate_value(-5))
-    print(fuzzy_system.compute(-5.4))
+    print(fuzzy_system.compute(-3.2))
+
 
 def set_up_gui():
     app = QtWidgets.QApplication(sys.argv)
@@ -42,4 +42,4 @@ def set_up_gui():
 
 if __name__ == "__main__":
     main()
-    #set_up_gui()
+    set_up_gui()

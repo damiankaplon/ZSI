@@ -30,8 +30,13 @@ class FuzzySystem:
         fuzzy_value = self.entry_fuzzy_set.fuzzificate_value(entry)
         fuzzy_value_transformed = self.resolve_rules(fuzzy_value)
         result_term = self.out_fuzzy_set.conclude(fuzzy_value_transformed)
-        return result_term
 
-
-
-
+        divided = 0
+        divider = 0
+        for x, value in zip(self.out_fuzzy_set.value_axes[0], result_term):
+            divided += x * value
+            divider += value
+        if divider == 0:
+            return 0
+        else:
+            return divided / divider
