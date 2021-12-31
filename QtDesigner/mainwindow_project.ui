@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>520</width>
+    <height>453</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,6 +23,12 @@
       <height>160</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>9000</number>
+    </property>
+    <property name="singleStep">
+     <number>1</number>
+    </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
     </property>
@@ -35,6 +41,9 @@
       <width>16</width>
       <height>160</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>10000</number>
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
@@ -66,14 +75,47 @@
      <string>Actual temp</string>
     </property>
    </widget>
-   <widget class="QLCDNumber" name="fuzzy_output">
+   <widget class="QLCDNumber" name="lcd_fuzzy_output">
     <property name="geometry">
      <rect>
-      <x>550</x>
-      <y>170</y>
+      <x>340</x>
+      <y>150</y>
       <width>151</width>
       <height>61</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="lcd_user_temp">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>70</y>
+      <width>64</width>
+      <height>23</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="lcd_actual_temp">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>240</y>
+      <width>64</width>
+      <height>23</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>130</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Angel</string>
     </property>
    </widget>
   </widget>
@@ -82,7 +124,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>520</width>
      <height>22</height>
     </rect>
    </property>

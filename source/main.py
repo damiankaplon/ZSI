@@ -2,7 +2,6 @@
 
 import sys
 from PyQt5 import QtWidgets
-# TODO zrobimy tu pewnie jakies proste gui z Tkinter
 from fuzzylogic.fuzzyset import FuzzySet
 from fuzzylogic.fuzzysystem import FuzzySystem
 from fuzzylogic.rule import Rule
@@ -10,7 +9,7 @@ from fuzzylogic.terms import TriangleTerm, SquareTerm
 from gui import Ui_MainWindow
 
 
-def main():
+def create_fuzzy_system() -> FuzzySystem:
     term_super_cold = SquareTerm(-10, -8, -10, -6.75, "super cold")
     term_very_cold = SquareTerm(-7, -5.5, -7.5, -5, "very cold")
     term_cold = SquareTerm(-5.25, -3.5, -6.5, -3, "cold")
@@ -27,19 +26,18 @@ def main():
     fuzzy_out_set = FuzzySet(0, 90, 0.5, out_terms)
     rules = [Rule("super cold", "very big"), Rule("very cold", "big"), Rule("cold", "medium"),
              Rule("almost cold", "small"), Rule("chill", "very small")]
-    fuzzy_system = FuzzySystem(fuzzy_entry_set, fuzzy_out_set, rules)
-    print(fuzzy_system.compute(-3.2))
+    return FuzzySystem(fuzzy_entry_set, fuzzy_out_set, rules)
 
 
 def set_up_gui():
     app = QtWidgets.QApplication(sys.argv)
     main_window = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
-    ui.setupUi(main_window)
+    ui.setupUi(main_window, create_fuzzy_system())
     main_window.show()
     sys.exit(app.exec_())
 
 
 if __name__ == "__main__":
-    main()
+    #create_fuzzy_system()
     set_up_gui()
