@@ -39,5 +39,4 @@ def set_up_gui():
 
 
 if __name__ == "__main__":
-    #create_fuzzy_system()
     set_up_gui()
